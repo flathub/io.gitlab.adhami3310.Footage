@@ -6,14 +6,6 @@
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.rust-stable"
     ],
-    "add-extensions": {
-        "org.pitivi.Pitivi.Codecs": {
-            "directory": "lib/codecs",
-            "add-ld-path": "lib",
-            "bundle": true,
-            "autodelete": true
-        }
-    },
     "cleanup-commands": [
         "mkdir -p ${FLATPAK_DEST}/lib/ffmpeg"
     ],
@@ -300,8 +292,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://gitlab.com/adhami3310/Footage/uploads/ac59c39afdd2b21aaaba33f454ac8b88/footage-v1.1.tar.xz",
-                    "sha256": "a7d2a87d9108fc253227d6d9a7fbab98fca55cd7d3c4b5bc1dea31488af9267e"
+                    "url": "https://gitlab.com/adhami3310/Footage/uploads/ae10612f81d18ac7a851b6ee6e70d8f9/footage-v1.1.tar.xz",
+                    "sha256": "368f6882e9d882c10785989d6c927abd72da9f113491880703872fd05b7e8de6"
                 }
             ]
         }
