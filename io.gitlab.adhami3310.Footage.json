@@ -300,8 +300,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://gitlab.com/adhami3310/Footage/uploads/6fc1ed1a18eebf74390690a31aae3781/footage-v1.1.tar.xz",
-                    "sha256": "b76e41a7df59574b7c3df7f97eb84837f4ee1d61864f99b0f09c8bf3017cbf38"
+                    "url": "https://gitlab.com/adhami3310/Footage/uploads/ac59c39afdd2b21aaaba33f454ac8b88/footage-v1.1.tar.xz",
+                    "sha256": "a7d2a87d9108fc253227d6d9a7fbab98fca55cd7d3c4b5bc1dea31488af9267e"
                 }
             ]
         }
