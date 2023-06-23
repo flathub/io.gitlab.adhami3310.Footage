@@ -32,6 +32,7 @@
     "cleanup": [
         "/include",
         "/lib/*.a",
+        "/lib/gstreamer-1.0/*.a",
         "/lib/*.la",
         "/lib/gstreamer-1.0/include",
         "/lib/pkgconfig",
@@ -195,7 +196,7 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.com/AOMediaCodec/SVT-AV1",
-                    "commit": "ea296ef350714fb6f105b420fb0bc321d9997ffd"
+                    "commit": "08c18ba0768ed3dbbff0903adc326fb3a7549bd9"
                 }
             ]
         },
@@ -209,8 +210,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://gitlab.com/AOMediaCodec/SVT-AV1/-/archive/master/SVT-AV1-master.tar.gz?path=gstreamer-plugin",
-                    "sha256": "19a9f37baec61b805964a42e0123cd09838a27875f439d0336418fb1dbe7f524"
+                    "url": "https://gitlab.com/AOMediaCodec/SVT-AV1/-/archive/v1.6.0/SVT-AV1-v1.6.0.tar.gz?path=gstreamer-plugin",
+                    "sha256": "249087afa578a0a372e532b8637a42112a3ea668464ceac776ab2cf7b8bfbc88"
                 }
             ]
         },
@@ -292,8 +293,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://gitlab.com/adhami3310/Footage/uploads/ae10612f81d18ac7a851b6ee6e70d8f9/footage-v1.1.tar.xz",
-                    "sha256": "368f6882e9d882c10785989d6c927abd72da9f113491880703872fd05b7e8de6"
+                    "url": "https://gitlab.com/adhami3310/Footage/uploads/aa43ae3f31aa3e844d7d25587c123af3/footage-v1.2.tar.xz",
+                    "sha256": "bcc2daaf61458b7b496ac492dc8229731009ecc116737745b654af540a880811"
                 }
             ]
         }
