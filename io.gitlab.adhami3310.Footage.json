@@ -293,8 +293,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://gitlab.com/adhami3310/Footage/uploads/aa43ae3f31aa3e844d7d25587c123af3/footage-v1.2.tar.xz",
-                    "sha256": "bcc2daaf61458b7b496ac492dc8229731009ecc116737745b654af540a880811"
+                    "url": "https://gitlab.com/adhami3310/Footage/uploads/05b79650c2eb0fe187b1092b6dc0454e/footage-1.3.tar.xz",
+                    "sha256": "32dd08cc0b5435f559fcd768256a0558e43196a604854e99346ad45bb6d1b742"
                 }
             ]
         }
