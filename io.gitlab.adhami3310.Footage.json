@@ -305,8 +305,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://gitlab.com/adhami3310/Footage/uploads/3aad303b665077c25edba8e60da1f280/footage-1.3.tar.xz",
-                    "sha256": "f736eec34efbd5c97fd5a41baaf8c77d974fb1a2d00467691b7a1e20c05e151b"
+                    "url": "https://gitlab.com/adhami3310/Footage/uploads/0de552df20406b9afa31bf9ff466603a/footage-1.3.tar.xz",
+                    "sha256": "bf8540cb5a3d1163d78475487d4c1ff413387c6ac3bb64a86320ee9b9503aa17"
                 }
             ]
         }
