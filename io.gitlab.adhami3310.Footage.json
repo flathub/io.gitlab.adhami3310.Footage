@@ -146,8 +146,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://bitbucket.org/multicoreware/x265_git/downloads/x265_3.5.tar.gz",
-                    "sha256": "e70a3335cacacbba0b3a20ec6fecd6783932288ebc8163ad74bcc9606477cae8",
+                    "url": "https://bitbucket.org/multicoreware/x265_git/downloads/x265_4.0.tar.gz",
+                    "sha256": "75b4d05629e365913de3100b38a459b04e2a217a8f30efaa91b572d8e6d71282",
                     "x-checker-data": {
                         "type": "html",
                         "url": "https://bitbucket.org/multicoreware/x265_git/raw/stable/x265Version.txt",
