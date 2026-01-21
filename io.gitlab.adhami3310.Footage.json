@@ -1,7 +1,7 @@
 {
     "id": "io.gitlab.adhami3310.Footage",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "46",
+    "runtime-version": "49",
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.rust-stable"
@@ -54,21 +54,6 @@
         "ldflags": "-L/app/lib/codecs/lib"
     },
     "modules": [
-        {
-            "name": "blueprint-compiler",
-            "buildsystem": "meson",
-            "cleanup": [
-                "*"
-            ],
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler.git",
-                    "tag": "v0.10.0",
-                    "commit": "2a39a16391122af2f3d812e478c1c1398c98b972"
-                }
-            ]
-        },
         {
             "name": "liba52",
             "config-opts": [
@@ -123,7 +108,7 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://libmpeg2.sourceforge.net/files/libmpeg2-0.5.1.tar.gz",
+                    "url": "https://download.videolan.org/contrib/libmpeg2/libmpeg2-0.5.1.tar.gz",
                     "sha256": "dee22e893cb5fc2b2b6ebd60b88478ab8556cb3b93f9a0d7ce8f3b61851871d4"
                 },
                 {
@@ -143,17 +128,20 @@
             "name": "x265",
             "buildsystem": "cmake-ninja",
             "subdir": "source",
+            "config-opts": [
+                "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
+                "-DBUILD_SHARED_LIBS=ON",
+                "-DCMAKE_POSITION_INDEPENDENT_CODE=ON"
+            ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://bitbucket.org/multicoreware/x265_git/downloads/x265_3.5.tar.gz",
-                    "sha256": "e70a3335cacacbba0b3a20ec6fecd6783932288ebc8163ad74bcc9606477cae8",
-                    "x-checker-data": {
-                        "type": "html",
-                        "url": "https://bitbucket.org/multicoreware/x265_git/raw/stable/x265Version.txt",
-                        "version-pattern": "releasetag: ([\\d\\.-]*)$",
-                        "url-template": "https://bitbucket.org/multicoreware/x265_git/downloads/x265_$version.tar.gz"
-                    }
+                    "url": "https://bitbucket.org/multicoreware/x265_git/downloads/x265_4.1.tar.gz",
+                    "sha256": "a31699c6a89806b74b0151e5e6a7df65de4b49050482fe5ebf8a4379d7af8f29"
+                },
+                {
+                    "type": "patch",
+                    "path": "patches/x265-cmake.patch"
                 }
             ]
         },
@@ -161,16 +149,16 @@
             "name": "x264",
             "config-opts": [
                 "--enable-shared",
-                "--enable-static",
-                "--enable-pic",
-                "--disable-lavf"
+                "--disable-static",
+                "--disable-cli",
+                "--enable-pic"
             ],
             "sources": [
                 {
                     "type": "git",
                     "url": "https://code.videolan.org/videolan/x264.git",
                     "//": "Just get the latest from https://code.videolan.org/videolan/x264/-/commits/stable/ they don't do tags/snapshots/releases anymore",
-                    "commit": "baee400fa9ced6f5481a728138fed6e867b0ff7f"
+                    "commit": "31e19f92f00c7003fa115047ce50978bc98c3a0d"
                 }
             ]
         },
@@ -183,8 +171,8 @@
                 {
                     "type": "git",
                     "url": "https://github.com/mstorsjo/fdk-aac.git",
-                    "tag": "v0.1.6",
-                    "commit": "a30bfced6b6d6d976c728552d247cb30dd86e238"
+                    "tag": "v2.0.3",
+                    "commit": "716f4394641d53f0d79c9ddac3fa93b03a49f278"
                 }
             ]
         },
@@ -221,90 +209,137 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.com/AOMediaCodec/SVT-AV1",
-                    "tag": "v2.0.0",
-                    "commit": "2aeeb4f1a1d495b84bf5c21dbb60ae10e991fada"
+                    "tag": "v3.1.2",
+                    "commit": "b33dcc56cc64fcb3b3569094af8ab1d0d81ab4c1"
                 }
             ]
         },
         {
-            "name": "gstreamer-svt-av1",
-            "buildsystem": "simple",
-            "build-commands": [
-                "cd gstreamer-plugin && meson -Dprefix=/app build",
-                "cd gstreamer-plugin && ninja -C build install"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://gitlab.com/AOMediaCodec/SVT-AV1/-/archive/v2.0.0/SVT-AV1-v2.0.0.tar.gz?path=gstreamer-plugin",
-                    "sha256": "7a6848e0244b2e35df4546b9c48fef62ba6148eab990a5b5c3d047fdf7612841"
-                }
-            ]
-        },
-        {
-            "name": "gstreamer",
+            "name": "gstreamer-plugins-bad",
             "buildsystem": "meson",
-            "builddir": true,
             "config-opts": [
                 "--libdir=lib",
                 "--wrap-mode=nodownload",
+                "-Dauto_features=disabled",
+                "-Dx265=enabled",
                 "-Dgpl=enabled",
-                "-Dgood=enabled",
-                "-Dbase=enabled",
-                "-Dugly=enabled",
-                "-Dvaapi=enabled",
-                "-Ddoc=disabled",
-                "-Dgst-examples=disabled",
-                "-Dpython=disabled"
+                "-Dsvtav1=enabled"
             ],
+            "subdir": "subprojects/gst-plugins-bad",
             "sources": [
                 {
                     "type": "git",
-                    "tag": "1.22.8",
+                    "tag": "1.26.10",
                     "url": "https://gitlab.freedesktop.org/gstreamer/gstreamer.git",
-                    "commit": "4af14db10e8355f980bbf79733af004e59d255fc",
-                    "disable-submodules": false
+                    "commit": "bfdc62185e243d3633aa916187a566d03a587792",
+                    "disable-submodules": true
                 }
             ]
         },
         {
-            "name": "cargo-c",
-            "buildsystem": "simple",
-            "build-commands": [
-                "mkdir .cargo",
-                "echo -e '[source.crates-io]\nreplace-with = \"vendored-sources\"\n\n[source.vendored-sources]\ndirectory = \"cargo/vendor\"' >> .cargo/config",
-                "cat .cargo/config",
-                "cargo --offline fetch --manifest-path Cargo.toml --verbose",
-                "cargo install --path . --root /app"
+            "name": "gstreamer-vaaapi",
+            "buildsystem": "meson",
+            "config-opts": [
+                "--libdir=lib",
+                "--wrap-mode=nodownload",
+                "-Dauto_features=disabled",
+                "-Ddrm=enabled",
+                "-Dwayland=enabled",
+                "-Dx11=enabled",
+                "-Dencoders=enabled"
             ],
+            "subdir": "subprojects/gstreamer-vaapi",
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://github.com/lu-zero/cargo-c",
-                    "tag": "v0.9.20",
-                    "sha256": "ddf235c6d039d7e75f211f62da16fa5baa2bb2ad"
-                },
-                "cargo-c-sources.json"
-            ],
-            "cleanup": [
-                "*"
+                    "tag": "1.26.10",
+                    "url": "https://gitlab.freedesktop.org/gstreamer/gstreamer.git",
+                    "commit": "bfdc62185e243d3633aa916187a566d03a587792",
+                    "disable-submodules": true
+                }
             ]
         },
         {
-            "name": "gst-plugins-rs",
+            "name": "gstreamer-plugins-ugly",
+            "buildsystem": "meson",
+            "config-opts": [
+                "--libdir=lib",
+                "--wrap-mode=nodownload",
+                "-Dauto_features=disabled",
+                "-Dx264=enabled",
+                "-Dgpl=enabled"
+            ],
+            "subdir": "subprojects/gst-plugins-ugly",
+            "sources": [
+                {
+                    "type": "git",
+                    "tag": "1.26.10",
+                    "url": "https://gitlab.freedesktop.org/gstreamer/gstreamer.git",
+                    "commit": "bfdc62185e243d3633aa916187a566d03a587792",
+                    "disable-submodules": true
+                }
+            ]
+        },
+        {
+            "name": "gstreamer-editing-services",
+            "buildsystem": "meson",
+            "config-opts": [
+                "--libdir=lib",
+                "--wrap-mode=nodownload",
+                "-Dauto_features=disabled"
+            ],
+            "subdir": "subprojects/gst-editing-services",
+            "sources": [
+                {
+                    "type": "git",
+                    "tag": "1.26.10",
+                    "url": "https://gitlab.freedesktop.org/gstreamer/gstreamer.git",
+                    "commit": "bfdc62185e243d3633aa916187a566d03a587792",
+                    "disable-submodules": true
+                }
+            ]
+        },
+        {
+            "name": "gst-plugin-gtk4",
             "buildsystem": "simple",
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://gitlab.com/adhami3310/Footage/-/raw/615ef6e9c600da451ead6113cda06cc0033901b9/flatpak/gst-plugins-rs.tar.xz?inline=false",
-                    "sha256": "60d8d83f3228f282c2d93030ff583a7eff0fd7423aba9907ac8d579f89505c20"
-                }
+                    "url": "https://crates.io/api/v1/crates/gst-plugin-gtk4/0.12.5/download",
+                    "dest-filename": "gst-plugin-gtk4-0.12.5.tar.gz",
+                    "sha256": "56e483cb1452f056ae94ccd5f63bdec697e04c87b30d89eb30c3f934042e1022"
+                },
+                "gst-plugin-gtk4-sources.json"
             ],
             "build-commands": [
-                "cargo --offline fetch --manifest-path Cargo.toml --verbose",
-                "cargo cinstall -p gst-plugin-gtk4 --prefix=/app",
-                "cargo cinstall -p gst-plugin-gif --prefix=/app"
-            ]
+                "cargo cinstall --offline --release --features=wayland,x11glx,x11egl,gtk_v4_14 --library-type=cdylib --prefix=/app --libdir=/app/lib"
+            ],
+            "build-options": {
+                "env": {
+                    "CARGO_HOME": "/run/build/gst-plugin-gtk4/cargo"
+                }
+            }
+        },
+        {
+            "name": "gst-plugin-gif",
+            "buildsystem": "simple",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://crates.io/api/v1/crates/gst-plugin-gif/0.13.0/download",
+                    "dest-filename": "gst-plugin-gif-0.13.0.tar.gz",
+                    "sha256": "cc129158467d8083bebb7a63aab59a4f0dbb29f3ecf7c5072d8205a69bcbe72a"
+                },
+                "gst-plugin-gif-sources.json"
+            ],
+            "build-commands": [
+                "cargo cinstall --offline --release --library-type=cdylib --prefix=/app --libdir=/app/lib"
+            ],
+            "build-options": {
+                "env": {
+                    "CARGO_HOME": "/run/build/gst-plugin-gif/cargo"
+                }
+            }
         },
         {
             "name": "footage",
@@ -313,8 +348,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://gitlab.com/adhami3310/Footage/uploads/7f7b5cc521b1ff7c161cad9483cfa1dd/footage-1.3.2.tar.xz",
-                    "sha256": "3ca98137fa8299cd1579296dc6956943f29edbdfdfb5ecb481a496084239b2ed"
+                    "url": "https://gitlab.com/-/project/46658491/uploads/7de55e281b324b13e83203a83ea1759a/footage-1.3.3.tar.xz",
+                    "sha256": "aa0ac8d01e8c5cbb21a56d88029fbe641ffde478597a5d2d8adb397a90d71e80"
                 }
             ]
         }
