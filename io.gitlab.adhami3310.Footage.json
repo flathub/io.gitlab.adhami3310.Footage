@@ -6,12 +6,6 @@
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.rust-stable"
     ],
-    "add-extensions": {
-        "org.freedesktop.Platform.GL.default": {
-            "directory": "lib/GL",
-            "version": "25.08"
-        }
-    },
     "cleanup": [
         "/include",
         "/lib/pkgconfig",
